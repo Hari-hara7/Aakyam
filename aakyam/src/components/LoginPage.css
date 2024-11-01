@@ -1,5 +1,8 @@
 /* LoginPage.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +15,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('../assets/81804.jpg');/* Replace with your image path */
+  background-image: url('../assets/81804.jpg'); /* Replace with your image path */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -25,10 +28,6 @@ body {
   min-height: 100vh;
   position: relative;
   padding: 20px;
-/* Replace with your image path */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .login-form {
@@ -44,7 +43,8 @@ body {
 .login-title {
   font-size: 2rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #ffffff, #ffcc00);
+  font-family: 'Lobster', cursive; /* Apply the festive font */
+  background: linear-gradient(90deg, #ff5722, #ffcc00);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -58,6 +58,11 @@ body {
   padding: 0.75rem;
   border-radius: 5px;
   margin: 0.5rem 0;
+  transition: background-color 0.3s ease;
+}
+
+.input-group:focus-within {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .icon {
@@ -73,10 +78,27 @@ body {
   color: white;
   outline: none;
   font-size: 1rem;
+  font-family: 'Poppins', sans-serif; /* Apply the new font for input */
+  background: linear-gradient(90deg, #ff5722, #ffcc00); /* Gradient color for input */
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 .login-input::placeholder {
   color: #aaa;
+}
+
+.login-input:focus {
+  animation: shake 0.3s ease;
+  /* Ensure the shake animation does not trigger again in quick succession */
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
 }
 
 .login-button {
