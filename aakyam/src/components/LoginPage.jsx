@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { FaUser, FaIdBadge } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+
+import backgroundImage from '../assets/81804.jpg';
+
 import './LoginPage.css';
 
 const LoginPage = ({ onLogin }) => {
