@@ -59,7 +59,7 @@ const LoginPage = ({ onLogin }) => {
           <FaUser className="icon" />
           <input
             type="text"
-            placeholder="Name"
+            placeholder="Group Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -80,7 +80,7 @@ const LoginPage = ({ onLogin }) => {
         </div>
 
         {error && <p className="login-error">{error}</p>}
-        <button type="submit" className="login-button">Submit</button>
+        <button type="submit" className="login-button">Login</button>
       </form>
     </div>
   );

@@ -44,7 +44,7 @@ const QuizPage = ({ userData }) => {
 
     try {
       await axios.post('https://usebasin.com/f/f830d525824e', {
-        name: userData.name,
+      name: userData.name,
         usn: userData.usn,
         score: tempScore,
         totalQuestions: questions.length
