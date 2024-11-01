@@ -1,0 +1,129 @@
+/* App.css */
+
+/* Resetting default margin and padding for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Styling for the body and html */
+body, html {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  background-color: #000; /* Black background */
+  color: #ffffff; /* Default text color */
+}
+
+/* Main app container */
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Full height */
+}
+
+/* Common styles for inputs */
+input[type="text"],
+input[type="submit"] {
+  border: none;
+  border-radius: 5px;
+  padding: 12px;
+  margin: 8px 0;
+  width: 100%; /* Full width for inputs */
+  font-size: 16px;
+}
+
+/* Specific styles for text inputs */
+input[type="text"] {
+  background-color: #333; /* Dark gray for input background */
+  color: #fff; /* White text */
+  transition: background-color 0.3s ease;
+}
+
+/* Input focus effects */
+input[type="text"]:focus {
+  background-color: #444; /* Lighter gray when focused */
+  outline: none; /* Remove default outline */
+}
+
+/* Submit button styles */
+input[type="submit"] {
+  background: linear-gradient(90deg, #ffcc00, #ff6600); /* Yellow to orange gradient */
+  color: #000; /* Black text for button */
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s; /* Button transition effects */
+}
+
+/* Button hover effects */
+input[type="submit"]:hover {
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+  background: linear-gradient(90deg, #ff6600, #ffcc00); /* Reverse gradient on hover */
+}
+
+/* Styles for welcome message */
+.welcome-message {
+  font-size: 24px;
+  color: #ffcc00; /* Yellow text */
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Styles for the quiz page */
+.quiz-container {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Subtle shadow */
+}
+
+/* Quiz question styles */
+.question {
+  margin: 15px 0;
+  font-size: 20px;
+  color: #ffcc00; /* Yellow color for questions */
+}
+
+/* Answer options styles */
+.option {
+  background-color: #222; /* Dark background for options */
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px 0;
+  color: #ffffff; /* White text for options */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Option hover effects */
+.option:hover {
+  background-color: #444; /* Lighter gray on hover */
+}
+
+/* Score message styles */
+.score-message {
+  font-size: 24px;
+  color: #ffcc00; /* Yellow text */
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Footer styles */
+.footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  color: #ffcc00; /* Yellow footer text */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .welcome-message, .score-message, .question {
+    font-size: 18px; /* Smaller text on small screens */
+  }
+
+  input[type="text"], input[type="submit"] {
+    font-size: 14px; /* Smaller input text */
+  }
+}
