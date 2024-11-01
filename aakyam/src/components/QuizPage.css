@@ -1,4 +1,16 @@
 
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url(../assets/75291.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 
 .container.quiz-container {
   background-image: url(../assets/75291.jpg);
