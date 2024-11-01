@@ -47,13 +47,13 @@ const LoginPage = ({ onLogin }) => {
     <div className="login-container">
       {showWelcome && (
         <div className="welcome-popup">
-          <h3>Welcome to Aakyam, {name}!</h3>
+          <h3>Welcome to Aikyam, {name}!</h3>
           <p>Your USN: {usn}</p>
         </div>
       )}
 
       <form className="login-form" onSubmit={handleSubmit}>
-        <h2 className="login-title">Login to Aakyam</h2>
+        <h2 className="login-title">Login to Aikyam</h2>
 
         <div className="input-group">
           <FaUser className="icon" />

@@ -56,7 +56,7 @@ const QuizPage = ({ userData }) => {
 
   return (
     <div className="container quiz-container bg-dark text-light py-4 mt-4 shadow rounded">
-      <h2 className="text-center mb-4">Festival Quiz</h2>
+      <h2 className="text-center mb-4">Aikyam Quiz</h2>
       <div className="card border-light mb-3">
         <div className="card-body">
           <form onSubmit={handleSubmit}>
