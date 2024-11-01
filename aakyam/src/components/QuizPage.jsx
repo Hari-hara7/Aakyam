@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import './QuizPage.css';
@@ -8,6 +8,9 @@ const QuizPage = ({ userData }) => {
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
+  
+  // Store the original title to reset later
+  const originalTitle = document.title;
 
   const questions = [
     { question: "In which festival do people play with colors?", options: ["Holi", "Diwali", "Eid", "Christmas"], correct: "Holi" },
@@ -44,7 +47,7 @@ const QuizPage = ({ userData }) => {
 
     try {
       await axios.post('https://usebasin.com/f/f830d525824e', {
-      name: userData.name,
+        name: userData.name,
         usn: userData.usn,
         score: tempScore,
         totalQuestions: questions.length
@@ -53,6 +56,56 @@ const QuizPage = ({ userData }) => {
       console.error("Error sending data to Formspree:", error);
     }
   };
+
+  const preventRightClick = (e) => {
+    e.preventDefault();
+  };
+
+  const preventKeyboardShortcuts = (e) => {
+    if (e.ctrlKey || e.metaKey) {
+      if (e.key === 't' || e.key === 'n' || e.key === 'w') {
+        e.preventDefault();
+      }
+    }
+  };
+
+  const enterFullScreen = () => {
+    const element = document.documentElement;
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) { // Firefox
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) { // Chrome, Safari and Opera
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { // IE/Edge
+      element.msRequestFullscreen();
+    }
+  };
+
+  useEffect(() => {
+    enterFullScreen(); // Enter full-screen when component mounts
+
+    document.addEventListener('contextmenu', preventRightClick);
+    document.addEventListener('keydown', preventKeyboardShortcuts);
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        alert('You have navigated away from the quiz. Please stay on this page to continue.');
+        document.title = 'Quiz Alert!';
+        setTimeout(() => {
+          document.title = originalTitle;
+        }, 2000);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('contextmenu', preventRightClick);
+      document.removeEventListener('keydown', preventKeyboardShortcuts);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [originalTitle]);
 
   return (
     <div className="container quiz-container bg-dark text-light py-4 mt-4 shadow rounded">
