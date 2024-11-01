@@ -1,3 +1,5 @@
+
+
 .container.quiz-container {
   background-image: url(../assets/75291.jpg);
   background-size: cover;
@@ -12,7 +14,7 @@
   
   h2 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #ffcc00; /* Bright yellow for main heading */
+    color: #ffffff; /* Bright yellow for main heading */
   }
   
   h5.question-title {
