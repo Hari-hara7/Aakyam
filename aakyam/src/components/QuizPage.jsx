@@ -8,6 +8,7 @@ const QuizPage = ({ userData }) => {
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
+  const [showEmojis, setShowEmojis] = useState(false);
   
   // Store the original title to reset later
   const originalTitle = document.title;
@@ -44,6 +45,7 @@ const QuizPage = ({ userData }) => {
     setScore(tempScore);
     setSubmitted(true);
     setShowScore(true);
+    setShowEmojis(true); // Show emojis on submit
 
     try {
       await axios.post('https://usebasin.com/f/f830d525824e', {
@@ -109,7 +111,7 @@ const QuizPage = ({ userData }) => {
 
   return (
     <div className="container quiz-container bg-dark text-light py-4 mt-4 shadow rounded">
-      <h2 className="text-center mb-4">Aikyam Quiz</h2>
+      <h2 className="text-center mb-4">🎉 Welcome to the AIKYAM Quiz! 🎉</h2>
       <div className="card border-light mb-3">
         <div className="card-body">
           <form onSubmit={handleSubmit}>
@@ -142,15 +144,28 @@ const QuizPage = ({ userData }) => {
           </form>
         </div>
       </div>
-      
+
       {submitted && showScore && (
-      <div className="score-section mt-4 text-center">
-      <h4>Well done, {userData.name}!</h4>
-      <p>Your USN: <strong>{userData.usn}</strong></p>
-      <p>Your Score: <strong>{score} / {questions.length}</strong></p>
-      <p>Thanks for taking the AIKYAM Quiz! Great effort!</p>
-    </div>
+        <div className="score-section mt-4 text-center">
+          <h4>Well done, {userData.name}!</h4>
+          <p>Your USN: <strong>{userData.usn}</strong></p>
+          <p>Your Score: <strong>{score} / {questions.length}</strong></p>
+          <p>Thanks for taking the AIKYAM Quiz! Great effort!</p>
+        </div>
       )}
+
+      {showEmojis && (
+        <div className="emoji-fall">
+          <span role="img" aria-label="celebration">🎉</span>
+          <span role="img" aria-label="party">🎊</span>
+          <span role="img" aria-label="trophy">🏆</span>
+          <span role="img" aria-label="smile">😊</span>
+        </div>
+      )}
+
+      <footer className="footer mt-4 text-center">
+        <p>Designed and developed with 💛 by Aikyam Group</p>
+      </footer>
     </div>
   );
 };

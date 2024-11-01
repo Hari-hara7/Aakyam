@@ -87,4 +87,40 @@
       padding: 15px; /* Reduced padding in the score section */
     }
   }
+  .container {
+    position: relative; /* Allow absolute positioning for children */
+  }
+  
+  .emoji-fall {
+    position: absolute;
+    top: -50px; /* Start off-screen */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+    pointer-events: none;
+    animation: fall 3s linear infinite; /* Continuous falling animation */
+  }
+  
+  @keyframes fall {
+    0% {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-50%) translateY(100vh); /* Fall to the bottom */
+      opacity: 0;
+    }
+  }
+  
+  .footer {
+    position: fixed; /* Fix the footer at the bottom */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    padding: 10px 0; /* Vertical padding */
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+  }
   
