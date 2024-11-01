@@ -144,11 +144,12 @@ const QuizPage = ({ userData }) => {
       </div>
       
       {submitted && showScore && (
-        <div className="score-section mt-4 text-center">
-          <h4>Thank you, {userData.name}!</h4>
-          <p>Your USN: <strong>{userData.usn}</strong></p>
-          <p className="mt-2">Your Score: <strong>{score} / {questions.length}</strong></p>
-        </div>
+      <div className="score-section mt-4 text-center">
+      <h4>Well done, {userData.name}!</h4>
+      <p>Your USN: <strong>{userData.usn}</strong></p>
+      <p>Your Score: <strong>{score} / {questions.length}</strong></p>
+      <p>Thanks for taking the AIKYAM Quiz! Great effort!</p>
+    </div>
       )}
     </div>
   );
