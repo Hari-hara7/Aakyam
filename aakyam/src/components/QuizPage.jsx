@@ -12,17 +12,61 @@ const QuizPage = ({ userData }) => {
   const [locked, setLocked] = useState(false); // Lock the quiz on return
 
   const questions = [
-    { question: "In which festival do people play with colors?", options: ["Holi", "Diwali", "Eid", "Christmas"], correct: "Holi" },
-    { question: "Which festival is known as the festival of lights?", options: ["Holi", "Diwali", "Eid", "Christmas"], correct: "Diwali" },
-    { question: "Which festival celebrates the birth of Jesus Christ?", options: ["Easter", "Christmas", "Diwali", "Thanksgiving"], correct: "Christmas" },
-    { question: "What festival involves fasting during daylight hours for a month?", options: ["Holi", "Diwali", "Eid", "Christmas"], correct: "Eid" },
-    { question: "Which festival is known as the harvest festival of Kerala?", options: ["Onam", "Diwali", "Holi", "Pongal"], correct: "Onam" },
-    { question: "Which festival marks the start of the new year in the Punjabi calendar?", options: ["Lohri", "Diwali", "Eid", "Christmas"], correct: "Lohri" },
-    { question: "Which festival is celebrated with flying kites?", options: ["Holi", "Diwali", "Eid", "Makar Sankranti"], correct: "Makar Sankranti" },
-    { question: "Which festival is known for exchanging gifts and sweets?", options: ["Holi", "Diwali", "Raksha Bandhan", "Christmas"], correct: "Raksha Bandhan" },
-    { question: "Which Hindu festival marks the victory of Rama over Ravana?", options: ["Dussehra", "Diwali", "Holi", "Eid"], correct: "Dussehra" },
-    { question: "Which festival is dedicated to Lord Ganesha?", options: ["Holi", "Ganesh Chaturthi", "Eid", "Diwali"], correct: "Ganesh Chaturthi" }
-  ];
+    // Andhra Pradesh and Telangana Festivals
+    {
+        question: "Which festival celebrated in Andhra Pradesh and Telangana marks the Telugu New Year?",
+        options: ["Ugadi", "Diwali", "Sankranti", "Dussehra"],
+        correct: "Ugadi"
+    },
+    {
+        question: "What is the name of the harvest festival celebrated with special significance in Telangana, including the decoration of cows and bulls?",
+        options: ["Bathukamma", "Bonalu", "Sankranti", "Diwali"],
+        correct: "Sankranti"
+    },
+    {
+        question: "Which unique floral festival celebrated in Telangana is dedicated to Goddess Gauri, where women arrange flowers in a pot?",
+        options: ["Bathukamma", "Ugadi", "Holi", "Ganesh Chaturthi"],
+        correct: "Bathukamma"
+    },
+    {
+        question: "In Andhra Pradesh, which festival is celebrated with Bonam offerings to Mother Goddess Mahakali, especially in Hyderabad?",
+        options: ["Bonalu", "Bathukamma", "Diwali", "Ugadi"],
+        correct: "Bonalu"
+    },
+    {
+        question: "Which festival celebrated in Andhra Pradesh involves decorating homes with rangoli and lighting lamps to ward off evil spirits?",
+        options: ["Karthika Masam", "Diwali", "Sankranti", "Dussehra"],
+        correct: "Karthika Masam"
+    },
+
+    // General Indian Festivals
+    {
+        question: "Which festival celebrates the birth of Lord Krishna and is marked by fasting and midnight celebrations?",
+        options: ["Janmashtami", "Ram Navami", "Holi", "Diwali"],
+        correct: "Janmashtami"
+    },
+    {
+        question: "Which festival marks the victory of good over evil, with the burning of Ravana’s effigy in northern India?",
+        options: ["Dussehra", "Holi", "Diwali", "Raksha Bandhan"],
+        correct: "Dussehra"
+    },
+    {
+        question: "Which festival is known as the festival of lights and celebrates the return of Lord Rama to Ayodhya?",
+        options: ["Diwali", "Holi", "Pongal", "Onam"],
+        correct: "Diwali"
+    },
+    {
+        question: "What festival in Kerala is celebrated with the creation of intricate flower designs called Pookalam?",
+        options: ["Onam", "Pongal", "Diwali", "Vishu"],
+        correct: "Onam"
+    },
+    {
+        question: "In which festival do people in Punjab celebrate the harvest season with bhangra and gidda dances?",
+        options: ["Baisakhi", "Lohri", "Holi", "Dussehra"],
+        correct: "Baisakhi"
+    }
+];
+
 
   const handleAnswerChange = (index, value) => {
     const newAnswers = [...answers];
@@ -164,8 +208,8 @@ const QuizPage = ({ userData }) => {
         <div className="emoji-fall">
           <span role="img" aria-label="celebration">🎉</span>
           <span role="img" aria-label="party">🎊</span>
-          <span role="img" aria-label="trophy">🏆</span>
-          <span role="img" aria-label="smile">😊</span>
+          <span role="img" aria-label="trophy">🎊</span>
+          <span role="img" aria-label="smile">🎉</span>
         </div>
       )}
 
