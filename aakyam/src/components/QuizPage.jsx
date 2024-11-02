@@ -9,9 +9,7 @@ const QuizPage = ({ userData }) => {
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [showEmojis, setShowEmojis] = useState(false);
-  
-  // Store the original title to reset later
-  const originalTitle = document.title;
+  const [locked, setLocked] = useState(false); // Lock the quiz on return
 
   const questions = [
     { question: "In which festival do people play with colors?", options: ["Holi", "Diwali", "Eid", "Christmas"], correct: "Holi" },
@@ -45,10 +43,10 @@ const QuizPage = ({ userData }) => {
     setScore(tempScore);
     setSubmitted(true);
     setShowScore(true);
-    setShowEmojis(true); // Show emojis on submit
+    setShowEmojis(true);
 
     try {
-      await axios.post('https://usebasin.com/f/f830d525824e', {
+      await axios.post('https://usebasin.com/f/119065782b5f', {
         name: userData.name,
         usn: userData.usn,
         score: tempScore,
@@ -75,28 +73,27 @@ const QuizPage = ({ userData }) => {
     const element = document.documentElement;
     if (element.requestFullscreen) {
       element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) { // Firefox
+    } else if (element.mozRequestFullScreen) {
       element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) { // Chrome, Safari and Opera
+    } else if (element.webkitRequestFullscreen) {
       element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) { // IE/Edge
+    } else if (element.msRequestFullscreen) {
       element.msRequestFullscreen();
     }
   };
 
   useEffect(() => {
-    enterFullScreen(); // Enter full-screen when component mounts
+    enterFullScreen();
 
     document.addEventListener('contextmenu', preventRightClick);
     document.addEventListener('keydown', preventKeyboardShortcuts);
 
+    // Set up focus and visibility change handling
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
-        alert('You have navigated away from the quiz. Please stay on this page to continue.');
-        document.title = 'Quiz Alert!';
-        setTimeout(() => {
-          document.title = originalTitle;
-        }, 2000);
+        console.log('User navigated away');
+      } else if (document.visibilityState === 'visible') {
+        setLocked(true); // Lock the quiz when user returns
       }
     };
 
@@ -107,43 +104,52 @@ const QuizPage = ({ userData }) => {
       document.removeEventListener('keydown', preventKeyboardShortcuts);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [originalTitle]);
+  }, []);
 
   return (
     <div className="container quiz-container bg-dark text-light py-4 mt-4 shadow rounded">
       <h2 className="text-center mb-4">🎉 Welcome to the AIKYAM Quiz! 🎉</h2>
-      <div className="card border-light mb-3">
-        <div className="card-body">
-          <form onSubmit={handleSubmit}>
-            <div className="questions-section">
-              {questions.map((q, index) => (
-                <div key={index} className="question-section mb-4">
-                  <h5 className="question-title">{index + 1}. {q.question}</h5>
-                  <div className="options-group">
-                    {q.options.map((option) => (
-                      <div key={option} className="form-check form-check-inline">
-                        <input
-                          type="radio"
-                          className="form-check-input"
-                          id={`question-${index}-option-${option}`}
-                          name={`question-${index}`}
-                          value={option}
-                          checked={answers[index] === option}
-                          onChange={() => handleAnswerChange(index, option)}
-                        />
-                        <label className="form-check-label" htmlFor={`question-${index}-option-${option}`}>
-                          {option}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <button type="submit" className="btn btn-primary btn-block mt-4">Submit Quiz</button>
-          </form>
+      {locked ? (
+        <div className="locked-message text-center">
+          <h3>Quiz Locked</h3>
+          <p>You navigated away and returned. The quiz is now locked.</p>
         </div>
-      </div>
+      ) : (
+        <div className="card border-light mb-3">
+          <div className="card-body">
+            <form onSubmit={handleSubmit}>
+              <div className="questions-section">
+                {questions.map((q, index) => (
+                  <div key={index} className="question-section mb-4">
+                    <h5 className="question-title">{index + 1}. {q.question}</h5>
+                    <div className="options-group">
+                      {q.options.map((option) => (
+                        <div key={option} className="form-check form-check-inline">
+                          <input
+                            type="radio"
+                            className="form-check-input"
+                            id={`question-${index}-option-${option}`}
+                            name={`question-${index}`}
+                            value={option}
+                            checked={answers[index] === option}
+                            onChange={() => handleAnswerChange(index, option)}
+                          />
+                          <label className="form-check-label" htmlFor={`question-${index}-option-${option}`}>
+                            {option}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button type="submit" className="btn btn-primary btn-block mt-4" disabled={locked}>
+                Submit Quiz
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {submitted && showScore && (
         <div className="score-section mt-4 text-center">

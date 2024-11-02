@@ -26,7 +26,7 @@ const LoginPage = ({ onLogin }) => {
 
     try {
       // Send data to Formspree
-      await axios.post('https://usebasin.com/f/f830d525824e', { name, usn });
+      await axios.post('https://usebasin.com/f/119065782b5f', { name, usn });
       setError('');
 
       // Call onLogin to update the state in App.js
