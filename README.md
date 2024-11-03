@@ -1,7 +1,7 @@
 # AIKYAM Quiz App
 
 <p align="center">
-  <img src="aikyam1.png" alt="AIKYAM Quiz Logo" width="700" height="400">
+  <img src="aikyam1.png" alt="AIKYAM Quiz Logo of">
 </p>
 
 Welcome to the **AIKYAM Quiz App**! This interactive web application is designed to engage users with a fun quiz on festival-related trivia while showcasing your team's development skills.
