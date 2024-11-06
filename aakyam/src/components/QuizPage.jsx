@@ -10,7 +10,7 @@ const QuizPage = ({ userData }) => {
   const [showScore, setShowScore] = useState(false);
   const [showEmojis, setShowEmojis] = useState(false);
   const [locked, setLocked] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(10); // 5 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(200); // 5 minutes in seconds
 
   const questions = [
     // Andhra Pradesh and Telangana Festivals
