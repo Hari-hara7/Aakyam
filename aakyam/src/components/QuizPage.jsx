@@ -9,7 +9,8 @@ const QuizPage = ({ userData }) => {
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [showEmojis, setShowEmojis] = useState(false);
-  const [locked, setLocked] = useState(false); // Lock the quiz on return
+  const [locked, setLocked] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(10); // 5 minutes in seconds
 
   const questions = [
     // Andhra Pradesh and Telangana Festivals
@@ -67,7 +68,6 @@ const QuizPage = ({ userData }) => {
     }
 ];
 
-
   const handleAnswerChange = (index, value) => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
@@ -75,7 +75,7 @@ const QuizPage = ({ userData }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e && e.preventDefault();
     let tempScore = 0;
 
     questions.forEach((q, index) => {
@@ -97,17 +97,14 @@ const QuizPage = ({ userData }) => {
         totalQuestions: questions.length
       });
     } catch (error) {
-      console.error("Error sending data to Formspree:", error);
+      console.error("Error sending data:", error);
     }
   };
 
-  const preventRightClick = (e) => {
-    e.preventDefault();
-  };
-
+  const preventRightClick = (e) => e.preventDefault();
   const preventKeyboardShortcuts = (e) => {
     if (e.ctrlKey || e.metaKey) {
-      if (e.key === 't' || e.key === 'n' || e.key === 'w') {
+      if (['t', 'n', 'w'].includes(e.key)) {
         e.preventDefault();
       }
     }
@@ -132,12 +129,11 @@ const QuizPage = ({ userData }) => {
     document.addEventListener('contextmenu', preventRightClick);
     document.addEventListener('keydown', preventKeyboardShortcuts);
 
-    // Set up focus and visibility change handling
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
         console.log('User navigated away');
       } else if (document.visibilityState === 'visible') {
-        setLocked(true); // Lock the quiz when user returns
+        setLocked(true);
       }
     };
 
@@ -150,9 +146,27 @@ const QuizPage = ({ userData }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (timeLeft > 0 && !submitted) {
+      const timer = setInterval(() => setTimeLeft(timeLeft - 1), 1000);
+      return () => clearInterval(timer);
+    } else if (timeLeft === 0) {
+      handleSubmit(); // Auto-submit when time runs out
+    }
+  }, [timeLeft, submitted]);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+  };
+
   return (
     <div className="container quiz-container bg-dark text-light py-4 mt-4 shadow rounded">
       <h2 className="text-center mb-4">🎉 Welcome to the AIKYAM Quiz! 🎉</h2>
+      <div className="timer text-center mb-3">
+        <h5>Time Left: {formatTime(timeLeft)}</h5>
+      </div>
       {locked ? (
         <div className="locked-message text-center">
           <h3>Quiz Locked</h3>
