@@ -15,22 +15,25 @@ const QuizPage = ({ userData }) => {
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
 
   const questions = [
-    { question: "Which festival celebrated in Andhra Pradesh and Telangana marks the Telugu New Year?", options: ["Ugadi", "Diwali", "Sankranti", "Dussehra"], correct: "Ugadi", critical: true },
-    { question: "What is the name of the harvest festival celebrated with special significance in Telangana, including the decoration of cows and bulls?", options: ["Bathukamma", "Bonalu", "Sankranti", "Diwali"], correct: "Sankranti", critical: false },
-    { question: "Which unique floral festival celebrated in Telangana is dedicated to Goddess Gauri, where women arrange flowers in a pot?", options: ["Bathukamma", "Ugadi", "Holi", "Ganesh Chaturthi"], correct: "Bathukamma", critical: true },
-    { question: "In Andhra Pradesh, which festival is celebrated with Bonam offerings to Mother Goddess Mahakali, especially in Hyderabad?", options: ["Bonalu", "Bathukamma", "Diwali", "Ugadi"], correct: "Bonalu", critical: false },
-    { question: "Which festival celebrated in Andhra Pradesh involves decorating homes with rangoli and lighting lamps to ward off evil spirits?", options: ["Karthika Masam", "Diwali", "Sankranti", "Dussehra"], correct: "Karthika Masam", critical: true },
-    { question: "Which festival celebrates the birth of Lord Krishna and is marked by fasting and midnight celebrations?", options: ["Janmashtami", "Ram Navami", "Holi", "Diwali"], correct: "Janmashtami", critical: false },
-    { question: "Which festival marks the victory of good over evil, with the burning of Ravana’s effigy in northern India?", options: ["Dussehra", "Holi", "Diwali", "Raksha Bandhan"], correct: "Dussehra", critical: true },
-    { question: "Which festival is known as the festival of lights and celebrates the return of Lord Rama to Ayodhya?", options: ["Diwali", "Holi", "Pongal", "Onam"], correct: "Diwali", critical: true },
-    { question: "What festival in Kerala is celebrated with the creation of intricate flower designs called Pookalam?", options: ["Onam", "Pongal", "Diwali", "Vishu"], correct: "Onam", critical: false },
-    { question: "In which festival do people in Punjab celebrate the harvest season with bhangra and gidda dances?", options: ["Baisakhi", "Lohri", "Holi", "Dussehra"], correct: "Baisakhi", critical: false },
-    { question: "Which festival in Andhra Pradesh is celebrated to honor ancestors with offerings and prayers?", options: ["Pitru Paksha", "Diwali", "Ganesh Chaturthi", "Makar Sankranti"], correct: "Pitru Paksha", critical: true },
-    { question: "Which festival is celebrated with kites flying and special sweets made of sesame and jaggery in Telangana?", options: ["Sankranti", "Diwali", "Ugadi", "Navratri"], correct: "Sankranti", critical: false },
-    { question: "Which festival signifies the arrival of spring and involves playing with colors?", options: ["Holi", "Diwali", "Eid", "Navratri"], correct: "Holi", critical: true },
-    { question: "Which festival in Telangana includes the traditional Marigold flower arrangements and community gatherings?", options: ["Bathukamma", "Onam", "Raksha Bandhan", "Christmas"], correct: "Bathukamma", critical: false },
-    { question: "Which festival marks the harvest season in Tamil Nadu and is celebrated with traditional food and cultural events?", options: ["Pongal", "Ugadi", "Onam", "Diwali"], correct: "Pongal", critical: true }
+    { question: "Which festival marks the victory of good over evil and is celebrated by burning effigies of Ravana?", options: ["Holi", "Diwali", "Dussehra", "Eid"], correct: "Dussehra", critical: true },
+    { question: "Which Indian festival is known as the Festival of Lights?", options: ["Christmas", "Eid", "Dussehra", "Diwali"], correct: "Diwali", critical: true },
+    { question: "Which Indian festival involves distributing sweets to friends and family as a symbol of goodwill?", options: ["Eid", "Diwali", "Christmas", "Raksha Bandhan"], correct: "Diwali", critical: false },
+    { question: "Which Islamic festival marks the end of Ramadan, the holy month of fasting?", options: ["Diwali", "Eid-ul-Adha", "Eid-ul-Fitr", "Ram Navami"], correct: "Eid-ul-Fitr", critical: true },
+    { question: "During which festival do Muslims worldwide observe fasting from dawn until sunset?", options: ["Eid", "Diwali", "Ramadan", "Holi"], correct: "Ramadan", critical: true },
+    { question: "What activity is commonly done during Holi, the festival of colors?", options: ["Lighting lamps", "Fasting", "Playing with colors", "Distributing sweets"], correct: "Playing with colors", critical: false },
+    { question: "Which Christian festival celebrates the resurrection of Jesus Christ?", options: ["Good Friday", "Christmas", "Diwali", "Easter"], correct: "Easter", critical: true },
+    { question: "Which festival celebrates the birth of Jesus Christ and is marked by the exchange of gifts?", options: ["Diwali", "Easter", "Christmas", "Ram Navami"], correct: "Christmas", critical: true },
+    { question: "Which major Hindu festival is celebrated in Maharashtra with dandiya and Garba dances?", options: ["Holi", "Diwali", "Eid", "Navratri"], correct: "Navratri", critical: false },
+    { question: "Which festival celebrated in Tamil Nadu marks the end of the harvest season?", options: ["Onam", "Diwali", "Pongal", "Holi"], correct: "Pongal", critical: true },
+    { question: "Which festival, also known as the Festival of Sacrifice, is observed by Muslims?", options: ["Eid-ul-Fitr", "Diwali", "Holi", "Eid-ul-Adha"], correct: "Eid-ul-Adha", critical: false },
+    { question: "Which festival in Maharashtra is celebrated by creating elaborate rangolis and lighting diyas?", options: ["Ganesh Chaturthi", "Diwali", "Onam", "Holi"], correct: "Diwali", critical: false },
+    { question: "What is the main activity during the harvest festival of Lohri celebrated in Punjab?", options: ["Dancing around the Maypole", "Flying kites", "Distributing sweets", "Lighting bonfires"], correct: "Lighting bonfires", critical: false },
+    { question: "Which festival marks the harvest season and is celebrated with traditional dances and bonfires in North India?", options: ["Eid", "Lohri", "Baisakhi", "Dussehra"], correct: "Baisakhi", critical: true },
+    { question: "Which Hindu festival is celebrated for 9 nights in honor of Goddess Durga?", options: ["Navratri", "Diwali", "Holi", "Eid"], correct: "Navratri", critical: true },
+   
+  
   ];
+  
 
   const shuffleQuestions = () => {
     setShuffledQuestions(questions.sort(() => 0.5 - Math.random()).slice(0, 15));
