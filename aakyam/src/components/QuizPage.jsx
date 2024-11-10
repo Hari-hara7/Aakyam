@@ -4,69 +4,82 @@ import PropTypes from 'prop-types';
 import './QuizPage.css';
 
 const QuizPage = ({ userData }) => {
-  const [answers, setAnswers] = useState(Array(10).fill(''));
+  const [answers, setAnswers] = useState(Array(15).fill(''));
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [showEmojis, setShowEmojis] = useState(false);
   const [locked, setLocked] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(200); // 5 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
+  const [startTime, setStartTime] = useState(Date.now()); // Record start time
+  const [shuffledQuestions, setShuffledQuestions] = useState([]);
 
   const questions = [
-    // Andhra Pradesh and Telangana Festivals
-    {
-        question: "Which festival celebrated in Andhra Pradesh and Telangana marks the Telugu New Year?",
-        options: ["Ugadi", "Diwali", "Sankranti", "Dussehra"],
-        correct: "Ugadi"
-    },
-    {
-        question: "What is the name of the harvest festival celebrated with special significance in Telangana, including the decoration of cows and bulls?",
-        options: ["Bathukamma", "Bonalu", "Sankranti", "Diwali"],
-        correct: "Sankranti"
-    },
-    {
-        question: "Which unique floral festival celebrated in Telangana is dedicated to Goddess Gauri, where women arrange flowers in a pot?",
-        options: ["Bathukamma", "Ugadi", "Holi", "Ganesh Chaturthi"],
-        correct: "Bathukamma"
-    },
-    {
-        question: "In Andhra Pradesh, which festival is celebrated with Bonam offerings to Mother Goddess Mahakali, especially in Hyderabad?",
-        options: ["Bonalu", "Bathukamma", "Diwali", "Ugadi"],
-        correct: "Bonalu"
-    },
-    {
-        question: "Which festival celebrated in Andhra Pradesh involves decorating homes with rangoli and lighting lamps to ward off evil spirits?",
-        options: ["Karthika Masam", "Diwali", "Sankranti", "Dussehra"],
-        correct: "Karthika Masam"
-    },
+    { question: "Which festival celebrated in Andhra Pradesh and Telangana marks the Telugu New Year?", options: ["Ugadi", "Diwali", "Sankranti", "Dussehra"], correct: "Ugadi", critical: true },
+    { question: "What is the name of the harvest festival celebrated with special significance in Telangana, including the decoration of cows and bulls?", options: ["Bathukamma", "Bonalu", "Sankranti", "Diwali"], correct: "Sankranti", critical: false },
+    { question: "Which unique floral festival celebrated in Telangana is dedicated to Goddess Gauri, where women arrange flowers in a pot?", options: ["Bathukamma", "Ugadi", "Holi", "Ganesh Chaturthi"], correct: "Bathukamma", critical: true },
+    { question: "In Andhra Pradesh, which festival is celebrated with Bonam offerings to Mother Goddess Mahakali, especially in Hyderabad?", options: ["Bonalu", "Bathukamma", "Diwali", "Ugadi"], correct: "Bonalu", critical: false },
+    { question: "Which festival celebrated in Andhra Pradesh involves decorating homes with rangoli and lighting lamps to ward off evil spirits?", options: ["Karthika Masam", "Diwali", "Sankranti", "Dussehra"], correct: "Karthika Masam", critical: true },
+    { question: "Which festival celebrates the birth of Lord Krishna and is marked by fasting and midnight celebrations?", options: ["Janmashtami", "Ram Navami", "Holi", "Diwali"], correct: "Janmashtami", critical: false },
+    { question: "Which festival marks the victory of good over evil, with the burning of Ravana’s effigy in northern India?", options: ["Dussehra", "Holi", "Diwali", "Raksha Bandhan"], correct: "Dussehra", critical: true },
+    { question: "Which festival is known as the festival of lights and celebrates the return of Lord Rama to Ayodhya?", options: ["Diwali", "Holi", "Pongal", "Onam"], correct: "Diwali", critical: true },
+    { question: "What festival in Kerala is celebrated with the creation of intricate flower designs called Pookalam?", options: ["Onam", "Pongal", "Diwali", "Vishu"], correct: "Onam", critical: false },
+    { question: "In which festival do people in Punjab celebrate the harvest season with bhangra and gidda dances?", options: ["Baisakhi", "Lohri", "Holi", "Dussehra"], correct: "Baisakhi", critical: false },
+    { question: "Which festival in Andhra Pradesh is celebrated to honor ancestors with offerings and prayers?", options: ["Pitru Paksha", "Diwali", "Ganesh Chaturthi", "Makar Sankranti"], correct: "Pitru Paksha", critical: true },
+    { question: "Which festival is celebrated with kites flying and special sweets made of sesame and jaggery in Telangana?", options: ["Sankranti", "Diwali", "Ugadi", "Navratri"], correct: "Sankranti", critical: false },
+    { question: "Which festival signifies the arrival of spring and involves playing with colors?", options: ["Holi", "Diwali", "Eid", "Navratri"], correct: "Holi", critical: true },
+    { question: "Which festival in Telangana includes the traditional Marigold flower arrangements and community gatherings?", options: ["Bathukamma", "Onam", "Raksha Bandhan", "Christmas"], correct: "Bathukamma", critical: false },
+    { question: "Which festival marks the harvest season in Tamil Nadu and is celebrated with traditional food and cultural events?", options: ["Pongal", "Ugadi", "Onam", "Diwali"], correct: "Pongal", critical: true }
+  ];
 
-    // General Indian Festivals
-    {
-        question: "Which festival celebrates the birth of Lord Krishna and is marked by fasting and midnight celebrations?",
-        options: ["Janmashtami", "Ram Navami", "Holi", "Diwali"],
-        correct: "Janmashtami"
-    },
-    {
-        question: "Which festival marks the victory of good over evil, with the burning of Ravana’s effigy in northern India?",
-        options: ["Dussehra", "Holi", "Diwali", "Raksha Bandhan"],
-        correct: "Dussehra"
-    },
-    {
-        question: "Which festival is known as the festival of lights and celebrates the return of Lord Rama to Ayodhya?",
-        options: ["Diwali", "Holi", "Pongal", "Onam"],
-        correct: "Diwali"
-    },
-    {
-        question: "What festival in Kerala is celebrated with the creation of intricate flower designs called Pookalam?",
-        options: ["Onam", "Pongal", "Diwali", "Vishu"],
-        correct: "Onam"
-    },
-    {
-        question: "In which festival do people in Punjab celebrate the harvest season with bhangra and gidda dances?",
-        options: ["Baisakhi", "Lohri", "Holi", "Dussehra"],
-        correct: "Baisakhi"
+  const shuffleQuestions = () => {
+    setShuffledQuestions(questions.sort(() => 0.5 - Math.random()).slice(0, 15));
+  };
+
+  useEffect(() => {
+    shuffleQuestions();
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey || e.metaKey) {
+        if (['t', 'n', 'w'].includes(e.key)) {
+          e.preventDefault();
+        }
+      }
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        console.log('User navigated away');
+      } else if (document.visibilityState === 'visible') {
+        setLocked(true);
+      }
+    });
+    return () => {
+      document.removeEventListener('contextmenu', (e) => e.preventDefault());
+      document.removeEventListener('keydown', (e) => {
+        if (e.ctrlKey || e.metaKey) {
+          if (['t', 'n', 'w'].includes(e.key)) {
+            e.preventDefault();
+          }
+        }
+      });
+      document.removeEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          console.log('User navigated away');
+        } else if (document.visibilityState === 'visible') {
+          setLocked(true);
+        }
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    if (timeLeft > 0 && !submitted) {
+      const timer = setInterval(() => setTimeLeft(timeLeft - 1), 1000);
+      return () => clearInterval(timer);
+    } else if (timeLeft === 0) {
+      handleSubmit();
     }
-];
+  }, [timeLeft, submitted]);
 
   const handleAnswerChange = (index, value) => {
     const newAnswers = [...answers];
@@ -78,7 +91,7 @@ const QuizPage = ({ userData }) => {
     e && e.preventDefault();
     let tempScore = 0;
 
-    questions.forEach((q, index) => {
+    shuffledQuestions.forEach((q, index) => {
       if (answers[index] === q.correct) {
         tempScore++;
       }
@@ -89,71 +102,20 @@ const QuizPage = ({ userData }) => {
     setShowScore(true);
     setShowEmojis(true);
 
+    const timeTaken = 300 - timeLeft; // Calculate time taken in seconds
+
     try {
       await axios.post('https://usebasin.com/f/119065782b5f', {
         name: userData.name,
         usn: userData.usn,
         score: tempScore,
-        totalQuestions: questions.length
+        totalQuestions: shuffledQuestions.length,
+        timeTaken, // Send time taken to API
       });
     } catch (error) {
       console.error("Error sending data:", error);
     }
   };
-
-  const preventRightClick = (e) => e.preventDefault();
-  const preventKeyboardShortcuts = (e) => {
-    if (e.ctrlKey || e.metaKey) {
-      if (['t', 'n', 'w'].includes(e.key)) {
-        e.preventDefault();
-      }
-    }
-  };
-
-  const enterFullScreen = () => {
-    const element = document.documentElement;
-    if (element.requestFullscreen) {
-      element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) {
-      element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) {
-      element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
-      element.msRequestFullscreen();
-    }
-  };
-
-  useEffect(() => {
-    enterFullScreen();
-
-    document.addEventListener('contextmenu', preventRightClick);
-    document.addEventListener('keydown', preventKeyboardShortcuts);
-
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') {
-        console.log('User navigated away');
-      } else if (document.visibilityState === 'visible') {
-        setLocked(true);
-      }
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    return () => {
-      document.removeEventListener('contextmenu', preventRightClick);
-      document.removeEventListener('keydown', preventKeyboardShortcuts);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (timeLeft > 0 && !submitted) {
-      const timer = setInterval(() => setTimeLeft(timeLeft - 1), 1000);
-      return () => clearInterval(timer);
-    } else if (timeLeft === 0) {
-      handleSubmit(); // Auto-submit when time runs out
-    }
-  }, [timeLeft, submitted]);
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -177,7 +139,7 @@ const QuizPage = ({ userData }) => {
           <div className="card-body">
             <form onSubmit={handleSubmit}>
               <div className="questions-section">
-                {questions.map((q, index) => (
+                {shuffledQuestions.map((q, index) => (
                   <div key={index} className="question-section mb-4">
                     <h5 className="question-title">{index + 1}. {q.question}</h5>
                     <div className="options-group">
@@ -201,32 +163,31 @@ const QuizPage = ({ userData }) => {
                   </div>
                 ))}
               </div>
-              <button type="submit" className="btn btn-primary btn-block mt-4" disabled={locked}>
-                Submit Quiz
-              </button>
+              {!submitted && (
+                <button type="submit" className="btn btn-primary w-100 mt-3">
+                  Submit
+                </button>
+              )}
             </form>
+            {showScore && (
+              <div className="score-section mt-4 text-center">
+                <h4>Well done, {userData.name}!</h4>
+                <p>Your USN: <strong>{userData.usn}</strong></p>
+                <p>Your Score: <strong>{score} / {questions.length}</strong></p>
+                <p>Thanks for taking the AIKYAM Quiz! Great effort!</p>
+              </div>
+            )}
+            {showEmojis && (
+              <div className="emoji-fall">
+                <span role="img" aria-label="celebration">🎉</span>
+                <span role="img" aria-label="party">🎊</span>
+                <span role="img" aria-label="trophy">🎊</span>
+                <span role="img" aria-label="smile">🎉</span>
+              </div>
+            )}
           </div>
         </div>
       )}
-
-      {submitted && showScore && (
-        <div className="score-section mt-4 text-center">
-          <h4>Well done, {userData.name}!</h4>
-          <p>Your USN: <strong>{userData.usn}</strong></p>
-          <p>Your Score: <strong>{score} / {questions.length}</strong></p>
-          <p>Thanks for taking the AIKYAM Quiz! Great effort!</p>
-        </div>
-      )}
-
-      {showEmojis && (
-        <div className="emoji-fall">
-          <span role="img" aria-label="celebration">🎉</span>
-          <span role="img" aria-label="party">🎊</span>
-          <span role="img" aria-label="trophy">🎊</span>
-          <span role="img" aria-label="smile">🎉</span>
-        </div>
-      )}
-
       <footer className="footer mt-4 text-center">
         <p>Designed and developed with 💛 by Aikyam Group</p>
       </footer>
