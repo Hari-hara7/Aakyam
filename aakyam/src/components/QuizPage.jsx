@@ -10,8 +10,8 @@ const QuizPage = ({ userData }) => {
   const [showScore, setShowScore] = useState(false);
   const [showEmojis, setShowEmojis] = useState(false);
   const [locked, setLocked] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
-  const [startTime, setStartTime] = useState(Date.now()); // Record start time
+  const [timeLeft, setTimeLeft] = useState(300); 
+  const [startTime, setStartTime] = useState(Date.now()); 
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
 
   const questions = [
@@ -105,7 +105,7 @@ const QuizPage = ({ userData }) => {
     setShowScore(true);
     setShowEmojis(true);
 
-    const timeTaken = 300 - timeLeft; // Calculate time taken in seconds
+    const timeTaken = 300 - timeLeft; 
 
     try {
       await axios.post('https://usebasin.com/f/119065782b5f', {
@@ -113,7 +113,7 @@ const QuizPage = ({ userData }) => {
         usn: userData.usn,
         score: tempScore,
         totalQuestions: shuffledQuestions.length,
-        timeTaken, // Send time taken to API
+        timeTaken, 
       });
     } catch (error) {
       console.error("Error sending data:", error);
