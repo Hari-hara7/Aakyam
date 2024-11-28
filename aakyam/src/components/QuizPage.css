@@ -1,8 +1,8 @@
-/* Import the new font */
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 body {
-  font-family: 'Roboto', sans-serif; /* Changed font to Roboto */
+  font-family: 'Roboto', sans-serif; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,17 +22,16 @@ body {
   max-width: 800px;
   padding: 20px;
   margin: 0 auto;
-  color: #ffffff; /* Default text color set to white */
+  color: #ffffff; 
 }
 
 h2 {
-  font-family: 'Roboto', sans-serif; /* Ensuring h2 also uses Roboto */
-  color: #ffffff; /* White for main heading */
+  font-family: 'Roboto', sans-serif; 
+  color: #ffffff; 
 }
 
 h5.question-title {
-  color: #ffcc00; /* Bright yellow for question titles */
-  font-weight: 500;
+  color: #ffcc00; 
 }
 
 .form-check-input {
@@ -40,27 +39,26 @@ h5.question-title {
 }
 
 .form-check-label {
-  color: #ffffff; /* White for option labels */
-}
+  color: #ffffff; 
 
 .btn-primary {
-  background-color: #ffcc00; /* Bright yellow for primary button */
+  background-color: #ffcc00; 
   border-color: #ffc107;
-  color: #000000; /* Black text on button */
+  color: #000000; 
   padding: 8px 16px;
 }
 
 .btn-primary:hover {
-  background-color: #ffc107; /* Slightly darker yellow on hover */
+  background-color: #ffc107; 
   border-color: #e6a900;
 }
 
 .options-group .form-check-label:hover {
-  color: #ffcc00; /* Bright yellow for hover effect on options */
+  color: #ffcc00;
 }
 
 .card-body {
-  background-color: #1a1a1a; /* Dark grey for card body */
+  background-color: #1a1a1a; 
   border-radius: 6px;
   padding: 15px;
 }
@@ -72,7 +70,7 @@ h5.question-title {
   background-repeat: no-repeat;
   padding: 20px;
   border-radius: 5px;
-  color: #ffcc00; /* Yellow for score section text */
+  color: #ffcc00; 
 }
 
 .questions-section {
@@ -81,19 +79,19 @@ h5.question-title {
   padding: 10px;
 }
 
-/* Responsive styling for smaller screens */
+
 @media (max-width: 768px) {
   .container.quiz-container {
-    padding: 10px; /* Reduced padding for mobile */
+    padding: 10px; 
   }
 
   .questions-section {
     max-height: 400px;
-    padding: 5px; /* Reduced padding inside questions section */
+    padding: 5px;
   }
 
   .quiz-container h2 {
-    font-size: 1.5rem; /* Slightly smaller heading on mobile */
+    font-size: 1.5rem; 
   }
 
   h5.question-title {
@@ -101,26 +99,26 @@ h5.question-title {
   }
 
   .form-check-label, .btn-primary {
-    font-size: 0.9rem; /* Slightly smaller font size for better fit */
+    font-size: 0.9rem; 
   }
 
   .score-section {
-    padding: 15px; /* Reduced padding in the score section */
+    padding: 15px; 
   }
 }
 
 .container {
-  position: relative; /* Allow absolute positioning for children */
+  position: relative;
 }
 
 .emoji-fall {
   position: absolute;
-  top: -50px; /* Start off-screen */
+  top: -50px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 50px;
   pointer-events: none;
-  animation: fall 3s linear infinite; /* Continuous falling animation */
+  animation: fall 3s linear infinite; 
 }
 
 @keyframes fall {
@@ -129,19 +127,19 @@ h5.question-title {
     opacity: 1;
   }
   100% {
-    transform: translateX(-50%) translateY(100vh); /* Fall to the bottom */
+    transform: translateX(-50%) translateY(100vh); 
     opacity: 0;
   }
 }
 
 .footer {
-  position: fixed; /* Fix the footer at the bottom */
+  position: fixed; 
   bottom: 0;
   left: 0;
   right: 0;
   
   background-repeat: no-repeat;
-  padding: 10px 0; /* Vertical padding */
+  padding: 10px 0; 
   font-size: 14px;
   color: #fff;
   text-align: center;
