@@ -25,20 +25,20 @@ const LoginPage = ({ onLogin }) => {
     }
 
     try {
-      // Send data to Formspree
+      
       await axios.post('https://usebasin.com/f/119065782b5f', { name, usn });
       setError('');
 
-      // Call onLogin to update the state in App.js
+      
       onLogin({ name, usn });
 
-      // Show welcome message
+      
       setShowWelcome(true);
 
-      // Navigate to the Quiz page after 3 seconds
+      
       setTimeout(() => {
         setShowWelcome(false);
-        navigate('/quiz'); // Navigate to the quiz route
+        navigate('/quiz'); 
       }, 3000);
     } catch (err) {
       console.error(err);
