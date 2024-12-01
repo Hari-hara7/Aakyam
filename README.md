@@ -36,7 +36,7 @@ Welcome to the **AIKYAM Quiz App**! This interactive web application is designed
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/aikyam-quiz-app.git
+   git clone https://github.com/Hari-hara7/Aakyam.git
    cd aikyam-quiz-app
 ## Install dependencies:
 
